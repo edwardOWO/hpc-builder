@@ -57,7 +57,7 @@ spack config add 'config:install_tree:root:/opt/software'
 spack config add modules:default:lmod:hide_implicits:true
 
 spack install cuda@11.8
-spack install cuda@12.9.2
+spack install cuda@12.9.1
 spack install cuda@13.0
 
 spack install openmpi@5.0.8 +cuda fabrics=ucx ^ucx +cuda ^cuda@11.8
