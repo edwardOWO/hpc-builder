@@ -4,3 +4,5 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-contai
 dnf clean expire-cache
 
 dnf install -y nvidia-container-toolkit
+
+nvidia-ctk runtime configure --runtime=docker
