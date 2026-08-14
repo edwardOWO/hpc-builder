@@ -45,6 +45,6 @@ chmod -R g+rwX /opt/spack
 
 
 # 設定 modulefiles module 路徑
-spack config add 'modules:default:roots:lmod:/opt/modulefiles
+spack config add "modules:default:enable:[lmod]"
+spack config add 'modules:default:roots:lmod:/opt/modulefiles'
 spack config add 'config:install_tree:root:/opt/software'
-'
