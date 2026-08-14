@@ -5,7 +5,8 @@ dnf install -y \
   strace \
   perf \
   valgrind \
-  patch
+  patch \
+  Lmod
 
 cat > /etc/profile.d/gcc-toolset-13.sh <<'EOF'
 source /opt/rh/gcc-toolset-13/enable
