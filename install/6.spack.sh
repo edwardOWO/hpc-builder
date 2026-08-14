@@ -19,7 +19,7 @@ EOF
 
 chmod 644 /etc/profile.d/spack.sh
 
-
+# 直接啟用
 export SPACK_ROOT=/opt/spack
 source "/opt/spack/share/spack/setup-env.sh"
 
@@ -32,9 +32,15 @@ cat > /etc/profile.d/lmod.sh <<'EOF'
 source /usr/share/lmod/lmod/init/bash
 
 module use /opt/modulefiles/linux-rocky9-x86_64/Core
+module use /opt/nvidia/hpc_sdk/modulefiles
 EOF
 
 chmod 644 /etc/profile.d/lmod.sh
+
+# 直接啟用
+source /usr/share/lmod/lmod/init/bash
+module use /opt/modulefiles/linux-rocky9-x86_64/Core
+module use /opt/nvidia/hpc_sdk/modulefiles
 
 
 # add permision
@@ -48,3 +54,18 @@ chmod -R g+rwX /opt/spack
 spack config add "modules:default:enable:[lmod]"
 spack config add 'modules:default:roots:lmod:/opt/modulefiles'
 spack config add 'config:install_tree:root:/opt/software'
+spack config add modules:default:lmod:hide_implicits:true
+
+spack install cuda@11.8
+spack install cuda@12.9.2
+spack install cuda@13.0
+
+spack install openmpi@5.0.8 +cuda fabrics=ucx ^ucx +cuda ^cuda@11.8
+spack install openmpi@5.0.8 +cuda fabrics=ucx ^ucx +cuda ^cuda@12.9.1
+spack install openmpi@5.0.8 +cuda fabrics=ucx ^ucx +cuda ^cuda@13.0
+
+spack module lmod refresh -y
+spack clean --downloads
+dnf clean all
+
+
